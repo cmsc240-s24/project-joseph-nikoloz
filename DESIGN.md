@@ -23,3 +23,5 @@ As a player, I'd like to visit a bar and have a chat with the bartender. I'd lik
 
 ## UML Diagrams
 
+NOTES:
+Problem with keeping fullSipsAmount static.

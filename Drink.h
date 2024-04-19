@@ -22,9 +22,9 @@ public:
      * @param alcPerc The % alcohol content of the Drink.
      * @return Null.
     */
-    Drink(std::string id, std::string consumable, int price, int sipsAmount, bool isAlc, int alcPerc)
+    Drink(std::string id, std::string consumable, int price, int sips, bool isAlc, int alcPerc)
         : Consumable(id, consumable, price, true),  
-        sipsAmount(sipsAmount), fullSipsAmount(sipsAmount), isAlc(isAlc), alcPercentage(alcPerc)  {} 
+        sipsAmount(sips), fullSipsAmount(sips), isAlc(isAlc), alcPercentage(alcPerc)  {} 
 
 
     /**
@@ -66,7 +66,7 @@ public:
     */
     void refillDrink() { sipsAmount = fullSipsAmount; }
 private:
-    int static fullSipsAmount;
+    int fullSipsAmount;
     int sipsAmount;
     int alcPercentage;
     bool isAlc;

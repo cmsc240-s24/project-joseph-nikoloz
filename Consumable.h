@@ -21,7 +21,7 @@ public:
      * @return Null.
      */
     Consumable(std::string id, std::string consumable, int price, bool isDrink)
-        : id(id), consumable(consumable), isDrink(isDrink) { }
+        : id(id), consumable(consumable), price(price), isDrink(isDrink) { }
 
     /**
      * @brief Gets the id of the consumable item.
