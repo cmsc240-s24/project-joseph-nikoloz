@@ -12,14 +12,14 @@ class Bar
             : id(id), name(name), bartender(bartender) { }
         
         // getters 
-        std::string getId();
-        std::string getName();
-        Bartender getBartender();
+        std::string getId() { return id; }
+        std::string getName() { return name; }
+        Bartender getBartender() { return bartender; }
 
         // setters
-        void setId();
-        void setName();
-        void setBartender(Bartender bartender);
+        void setId(std::string newId) { id = newId; }
+        void setName(std::string newName) { name = newName; }
+        void setBartender(Bartender newBart) { bartender = newBart; }
 
     private:
         std::string id;
