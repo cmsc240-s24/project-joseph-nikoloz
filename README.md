@@ -8,10 +8,10 @@ See course web page [Project: C++ REST API](https://cmsc240-s24.github.io/projec
 
 #### Write your group members names below:
 
-1.
-2.
+1. Joseph Lobowicz
+2. Nikoloz Gvelesiani
 
 ## Project Proposal
 
-Write your project proposal here...
+Our project will be an interactive adventure-esc game. The user will be a "player" who can visit bars, talk to bartenders, and enjoy refreshments and snacks. If the player gets bored of the variety in his vicinity, he can use the Airport or MagicTree to travel to different cities and/or realms to try the consumables there. 
 
