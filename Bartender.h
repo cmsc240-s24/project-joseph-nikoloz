@@ -9,10 +9,9 @@
 class Bartender 
 {
     public:
-        // constructor and destructor 
+        // constructor
         Bartender(std::string id, std::string name, std::string recommendation, std::vector<Consumable> consumableList)
             : id(id), name(name), recommendation(recommendation), consumableList(consumableList) { }
-        ~Bartender();
 
         // getters 
         std::string getId() { return id; }
@@ -23,7 +22,7 @@ class Bartender
         // setters
         void setId(std::string newId) { id = newId; }
         void setName(std::string newName) { name = newName; }
-        void setRec(std::string rec) { recommendation = rec; }
+        void setRecommendation(std::string rec) { recommendation = rec; }
         void setConsumableList(std::vector<Consumable> newList) { consumableList = newList; }
 
     private:
