@@ -46,7 +46,7 @@ public:
     int getFullSipsAmount() { return fullSipsAmount; }
 
     /**
-     * @brief Takes a sip from the Drink
+     * @brief Takes a sip from the Drink.
      * @return Null.
      * @throws "Drink is empty!"
     */
