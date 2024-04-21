@@ -1,12 +1,18 @@
 all: barAPI 
 
-barAPI: barAPI.o 
-	g++ barAPI.o -o barAPI -pthread
+barAPI: barAPI.o Drink.o Food.o
+	g++ Drink.o Food.o barAPI.o -o barAPI -pthread
 
-barAPI.o: barAPI.cpp Consumable.h Drink.h
+barAPI.o: barAPI.cpp Consumable.h Drink.h Food.h
 	g++ barAPI.cpp -c
 
+Food.o: Food.h Food.cpp Consumable.h
+	g++ Food.cpp -c
+
+Drink.o: Drink.h Drink.cpp Consumable.h
+	g++ Drink.cpp -c
+
 clean-code: 
-	rm -f barAPI.o barAPI
+	rm -f *.o barAPI
 
 clean: clean-code

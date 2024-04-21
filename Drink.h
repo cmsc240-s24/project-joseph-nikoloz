@@ -50,21 +50,21 @@ public:
      * @return Null.
      * @throws "Drink is empty!"
     */
-    void sipDrink() { }
+    void sipDrink();
 
     /**
      * @brief Chugs Drink fully.
      * @return Null.
      * @throw "Drink is already emtpy!"
     */
-    void chugDrink() { }
+    void chugDrink();
     
     /**
      * @brief Refill Drink to fullSipsAmount.
      * @return Null.
      * @throw "Drink already full!"
     */
-    void refillDrink() { }
+    void refillDrink();
 
 private:
     int fullSipsAmount;
