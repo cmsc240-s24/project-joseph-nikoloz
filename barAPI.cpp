@@ -21,13 +21,14 @@ int main()
     //drinksPerBarMap["1"] =  Drink("1", "Water", 1, 4, false, 0);
 
     Drink drink  = Drink("101", "Water", 2, 4, false, 0);
-    cout << "Drink 101            id : " << drink.getId() << endl;
-    cout << "Drink 101          name : " << drink.getConsumable() << endl;
-    cout << "Drink 101         price : " << "$" << drink.getPrice() << endl;
-    cout << "Drink 101      isDrink? : " << drink.getIsDrink() << endl;
-    cout << "Drink 101 fullSipAmount : " << drink.getFullSipsAmount() << endl;
-    cout << "Drink 101     sipsAmount: " << drink.getSipsAmount() << endl;
-    cout << "Drink 101        isAlc? : " << drink.getIsAlc() << endl;
+    cout << "Drink 101             id : " << drink.getId() << endl;
+    cout << "Drink 101           name : " << drink.getConsumable() << endl;
+    cout << "Drink 101          price : " << "$" << drink.getPrice() << endl;
+    cout << "Drink 101       isDrink? : " << drink.getIsDrink() << endl;
+    cout << "Drink 101  fullSipAmount : " << drink.getFullSipsAmount() << endl;
+    cout << "Drink 101      sipsAmount: " << drink.getSipsAmount() << endl;
+    cout << "Drink 101         isAlc? : " << drink.getIsAlc() << endl;
+    cout << "Drink 101 alcPercantage? : " << drink.getAlcPercentage() << endl;
 
     cout << "#########################" << endl << endl;
     cout << "Water, #1 drink out there. Now let's see a food, maybe French Fries?" << endl << endl;

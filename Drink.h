@@ -34,6 +34,12 @@ public:
     bool getIsAlc() { return isAlc; }
 
     /**
+     * @brief Get the integer value for the acohol % of Drink.
+     * @return The integer value for the acohol % of Drink.
+    */
+    int getAlcPercentage() { return alcPercentage; }
+
+    /**
      * @brief Get the amount of sips left in Drink.
      * @return Int of sips remaining.
     */
@@ -45,6 +51,12 @@ public:
     */
     int getFullSipsAmount() { return fullSipsAmount; }
 
+    /**
+     * @brief Sets the boolean value displaying whether or not Drink is acoholic
+     * @param isAlcohol boolean value regarding the acoholic status of Drink.
+     * @return Null
+    */
+    void setIsAlc(bool isAlcohol) { isAlc = isAlcohol; }
     /**
      * @brief Takes a sip from the Drink.
      * @return Null.

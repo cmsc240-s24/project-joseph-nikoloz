@@ -53,6 +53,13 @@ public:
     */
     void setPrice(int prc) { price = prc; }
 
+    /**
+     * @brief Sets a new name(consumable) for the consumable item.
+     * @param cons The new name(consumable) for the consumable item.
+     * @return Null.
+    */
+    void setConsumable(std::string cons) { consumable = cons; }
+
 private:
 
     std::string id;
