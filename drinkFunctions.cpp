@@ -142,8 +142,9 @@ response createDrink(request req)
     if (!readValueJson) 
         return response(400, "Invalid JSON");
     
-    // Create a new drink. NEEDS WORK
-    Drink drink{readValueJson["id"].s(), readValueJson["size"].s(), readValueJson["isThinCrust"].b()};
+    // Create a new drink. 
+    Drink drink{readValueJson["id"].s(), readValueJson["name"].s(), readValueJson["price"].i(),
+     readValueJson["sipsAmount"].i(), readValueJson["isAlc"].b(), readValueJson["alcPercentage"].i()};
 
     // Add the new drink to the map.
     drinksPerBarMap[drink.getId()] = drink;
@@ -319,8 +320,7 @@ map<string, Drink> loadFromFile(string filename)
         // and add it to the data map.
         for (json::rvalue item : jsonReadValue) 
         {
-	 //NEEDS MORE WORK CAUSE MORE VARS
-            Drink drink{item["id"].s(), item["consumable"].s(), item["isAlc"].b()};
+            Drink drink{item["id"].s(), item["name"].s(), item["price"].i(), item["sipsAmount"].i(), item["isAlc"].b(), item["alcPercentage"].i()};
             data[drink.getId()] = drink;
         }
     }

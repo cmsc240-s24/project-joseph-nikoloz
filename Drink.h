@@ -13,8 +13,8 @@ class Drink : public Consumable
 {
 public:
     //Default Constructor
-    Drink(std::string id, std::string consumable, int price)
-        : Consumable(id, consumable, price, true) {} 
+    Drink(): Consumable() { }
+
     /**
      * @brief Constructor for Drink.
      * @param sipsAmount The amount of sips left in the drink before its empty.

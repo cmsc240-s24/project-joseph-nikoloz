@@ -12,6 +12,8 @@
 class Consumable 
 {
 public:
+    // Default constructor
+    Consumable() { }
     /**
      * @brief Initializer for a Consumable instance.
      * @param id The id of the consumable item.
