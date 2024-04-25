@@ -12,7 +12,7 @@ class Building
         
         // getters 
         std::string getName() { return name; }
-        bool getBar() { return bar; }
+        bool getIsBar() { return bar; }
 
         // setters
         void setName(std::string newName) { name = newName; }

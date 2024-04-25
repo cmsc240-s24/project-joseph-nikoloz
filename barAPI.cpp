@@ -75,9 +75,9 @@ int main()
     {   
         for (pair<string, Building> locationBuildings : buildingsMapPair.second)
         {
-            if ( locationBuildings.second.getBar() )
+            if ( locationBuildings.second.getIsBar() )
             {
-                for (pair<string, Consumable> consumablesPair : locationBuildings.second.getBartender())
+                for (pair<string, Consumable> consumablesPair : locationBuildings.second.getIsBar().getBartender())
                 {
                     map<string, Consumable> newList = loadFromFile(locationBuildings.second.getName() + ".json");
                     consumablesPair.second.setConsumableList(newList);
