@@ -1,6 +1,7 @@
 #ifndef DRINK_H
 #define DRINK_H
 
+#include <crow.h>
 #include "Consumable.h"
 
 /**
@@ -12,9 +13,12 @@
 class Drink : public Consumable 
 {
 public:
-    //Default Constructor
+    //Constructors
     Drink(): Consumable() { }
 
+
+    Drink(crow::json::rvalue readValueJson);
+    
     /**
      * @brief Constructor for Drink.
      * @param sipsAmount The amount of sips left in the drink before its empty.
@@ -56,6 +60,14 @@ public:
      * @param isAlcohol boolean value regarding the acoholic status of Drink.
      * @return Null
     */
+
+    // Convert to JSON.
+    crow::json::wvalue convertToJson();
+
+    // Update from JSON.
+    void updateFromJson(crow::json::rvalue readValueJson);
+
+
     void setIsAlc(bool isAlcohol) { isAlc = isAlcohol; }
     /**
      * @brief Takes a sip from the Drink.
@@ -83,7 +95,6 @@ private:
     int sipsAmount;
     int alcPercentage;
     bool isAlc;
-    bool isEmpty;
     
 };
 

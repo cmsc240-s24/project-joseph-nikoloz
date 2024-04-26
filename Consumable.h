@@ -62,7 +62,7 @@ public:
     */
     void setConsumable(std::string cons) { consumable = cons; }
 
-private:
+protected:
 
     std::string id;
     std::string consumable;

@@ -1,25 +1,28 @@
 # Project Design Document
 
 ## Introduction
-The API will allow the user to visit bars, talk with the bartenders, enjoy different refreshments, and travel to new locations for new types of bars and consumables. 
+The barAPI will allow the user to visit bars, talk with the bartenders, and enjoy different refreshments(version 2.0:travel to new locations for new types of bars and consumables).
 
 ## Background/Context
 This API is for fun, and can also allow the user to learn about various drinks and foods.
 
 ## Stakeholders
-Anyone interested in choose-your-adventure- type of games will enjoy this experience. I think the biggest attraction to this API would be the conversational easter-eggs hidden around the game.
+Anyone interested in choose-your-adventure- type of games will enjoy this experience. I think the biggest attraction to this API would be the conversational easter-eggs hidden around the game. The easter eggs are spread around via bartender responses.
+
 
 ## Functional Requirements
-
+...
 
 ## Use Case Description
-As a player, I'd like to visit a bar and have a chat with the bartender. I'd like to try and learn about all of the drinks offered around the world of THIS_API_NAME.
+...
 
-## List Of Resources
-
+## List Of consumables
+Consumable: A general overarching class encasing all sorts of consumables.
+Drink, Food, (Potion): A subclass inheriting from consumable, varying in methods and syntax.
+...
 
 ## List of End Points
-
+...
 
 ## UML Diagrams
-
+...

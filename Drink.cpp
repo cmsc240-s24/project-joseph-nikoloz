@@ -5,6 +5,7 @@
 #include "Consumable.h"
 #include "Drink.h"
 
+using namespace crow;
 /**
  * @file Drink.cpp
  * @brief Implementation file for the Drink class functions.
@@ -21,7 +22,36 @@ int randomNumbero4 = dist4(rng); //Random number from 1 to 4
 int randomNumbero10 = dist10(rng); //Random number from 1 to 10
 int randomNumbero1000  = dist1000(rng); //Random number from 1 to 1000
 
+Drink::Drink(json::rvalue readValueJson)
+{
+    updateFromJson(readValueJson);
+}
+// Convert to JSON
+json::wvalue Drink::convertToJson() 
+{
+    json::wvalue writeValueJson;
+    writeValueJson["id"] = id;
+    writeValueJson["name"] = consumable;
+    writeValueJson["price"] = price;
+    writeValueJson["isAlc"] = isAlc;
+    writeValueJson["fullSipsAmount"] = fullSipsAmount;
+    writeValueJson["sipsAmount"] = sipsAmount;
+    writeValueJson["alcPercentage"] = alcPercentage; 
+    return writeValueJson;
+}
 
+// Update from JSON
+void Drink::updateFromJson(json::rvalue readValueJson)
+{
+    id = readValueJson["id"].s();
+    consumable = readValueJson["name"].s();
+    price = static_cast<int>(readValueJson["price"].d());    
+    fullSipsAmount = static_cast<int>(readValueJson["fullSipsAmount"].d());
+    sipsAmount = static_cast<int>(readValueJson["sipsAmount"].d());
+    alcPercentage = static_cast<int>(readValueJson["alcPercentage"].d());
+    isAlc = readValueJson["isAlc"].b();
+
+}
 
 /**
  * @brief Takes a sip from the Drink
@@ -31,7 +61,7 @@ int randomNumbero1000  = dist1000(rng); //Random number from 1 to 1000
 void Drink::sipDrink() 
 {
 
-    if (isEmpty == true)
+    if (sipsAmount == 0)
     {
         throw std::invalid_argument("Your drink is already empty!");
     }
@@ -44,11 +74,6 @@ void Drink::sipDrink()
         std::cout << "You take a sip of your drink." << std::endl;
     }
 
-    if (sipsAmount == 0)
-    {
-        isEmpty = true;
-    }
-
 }
 
 /**
@@ -58,12 +83,12 @@ void Drink::sipDrink()
 */
 void Drink::chugDrink()
 {
-    if (isEmpty == true)
+    if (sipsAmount == 0)
     {
         throw std::invalid_argument("Your drink is already empty!");
     }
     sipsAmount = 0;
-    isEmpty = true;
+
     if ( sipsAmount == 1)
     {
         std::cout << "You finish your drink." << std::endl;
