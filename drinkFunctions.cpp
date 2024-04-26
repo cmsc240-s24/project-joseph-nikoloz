@@ -1,7 +1,6 @@
 #include <crow.h>
 #include <map>
 #include <string>
-//#include “Consumable.h”
 #include "Drink.h"
 
 using namespace std;
@@ -143,9 +142,14 @@ response createDrink(request req)
         return response(400, "Invalid JSON");
     
     // Create a new drink. 
-    Drink drink{readValueJson["id"].s(), readValueJson["name"].s(), readValueJson["price"].i(),
-     readValueJson["sipsAmount"].i(), readValueJson["isAlc"].b(), readValueJson["alcPercentage"].i()};
-
+    Drink drink{
+    readValueJson["id"].s(),
+    readValueJson["name"].s(),
+    static_cast<int>(readValueJson["price"].d()),
+    static_cast<int>(readValueJson["sipsAmount"].d()),
+    readValueJson["isAlc"].b(),
+    static_cast<int>(readValueJson["alcPercentage"].d())
+    };
     // Add the new drink to the map.
     drinksPerBarMap[drink.getId()] = drink;
 
@@ -320,7 +324,12 @@ map<string, Drink> loadFromFile(string filename)
         // and add it to the data map.
         for (json::rvalue item : jsonReadValue) 
         {
-            Drink drink{item["id"].s(), item["name"].s(), item["price"].i(), item["sipsAmount"].i(), item["isAlc"].b(), item["alcPercentage"].i()};
+            Drink drink{            item["id"].s(), 
+                                    item["name"].s(), 
+                    static_cast<int>(item["price"].d()), 
+                    static_cast<int>(item["sipsAmount"].d()), 
+                                    item["isAlc"].b(), 
+                    static_cast<int>(item["alcPercentage"].d())};
             data[drink.getId()] = drink;
         }
     }
