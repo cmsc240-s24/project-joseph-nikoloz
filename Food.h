@@ -32,6 +32,8 @@ public:
     */
     bool getIsHot() { return isHot; }
 
+    // Override the isSpecial() method for Food
+    bool isSpecial() const override { return isHot; }
     /**
      * @brief Get the amount of bites left.
      * @return Int of bites remaining.
@@ -65,11 +67,12 @@ public:
     */
     void reorderFood();
 
+    static const bool isDrink = false;
+    
 private:
     int fullBitesAmount;
     int bitesAmount;
     bool isHot;
-    bool isEmpty;
     
 };
 

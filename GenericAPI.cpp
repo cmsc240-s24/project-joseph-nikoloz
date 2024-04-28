@@ -8,6 +8,7 @@
 
 #include <stdexcept>
 #include "GenericAPI.h"
+#include "Consumable.h"
 #include "Drink.h"
 #include "Food.h"
 
@@ -157,7 +158,7 @@ response GenericAPI<T>::deleteConsumable(string id)
 
 // Function to handle the GET request that includes the search parameter for searching consumables.
 template<typename T>
-response searchConsumable(string searchString, const map<string, T>& consumableMap) 
+response searchConsumables(string searchString, const map<string, T>& consumableMap) 
 {
     vector<T> found;
     // For each string/consumable pair in the consumableMap.
@@ -177,7 +178,7 @@ response searchConsumable(string searchString, const map<string, T>& consumableM
     int index = 0;
     for (T consumable : found)
     {
-        jsonWriteValue[index] = convertToJson(consumable);
+        jsonWriteValue[index] = consumable.convertToJson();
         index++;
     }
 
@@ -202,74 +203,86 @@ struct
    } 
 } comparatorDrinkAlcPerc;
 
-// Function to handle the GET request that includes the sort parameter for sorting consumables
+//Function to handle the GET request that includes the sort parameter for sorting consumables
 template<typename T>
 response sortConsumables(string sortString, map<string, T>& consumableMap) 
 {
-   // Vector to store the consumable pairs.
-   vector<pair<string, T>> consumablesToSort;
+    // Vector to store the consumable pairs.
+    vector<pair<string, T>> consumablesToSort;
 
-   // For each string/consumable pair in the consumablemap.
-   for (pair<string, T> consumablesPair : consumableMap) 
+    // For each string/consumable pair in the consumablemap.
+    for (pair<string, T> consumablesPair : consumableMap) 
     {
         consumablesToSort.push_back(consumablesPair);
     }
 
-    if (sortString == "price")
-    {
-        if (T.isDrink())
-        {
-            // Sort using price comparator function 
-            sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkPrice); 
 
-        } else if (sortString == "alcPercentage" || sortString == "alcoholPercentage") {
-            // Sort using alcPercentage comparator function
-            sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkAlcPerc); 
-        }
+    if (sortString == "price")    
+    {
+        // Sort using price comparator function 
+        sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkPrice); 
+
+    } else if (sortString == "alcPercentage" || sortString == "alcoholPercentage") {
+        // Sort using alcPercentage comparator function
+        sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkAlcPerc); 
     }
 
-   // Create a new JSON write value use to write to the file.
-   json::wvalue jsonWriteValue;
-   
-   // For each consumable in the vector, convert the consumable to JSON and add to the write value.
-   int index = 0;
-   for (pair<string, T> consumablesPair : consumablesToSort)
-   {
-       jsonWriteValue[index] = convertToJson(consumablesPair.second);
-       index++;
-   }
+    // if (sortString == "price")
+    // {
+    //     if (consumablesToSort.size() > 0) 
+    //     {
+    //         auto firstConsumable = consumablesToSort.begin()->second;
+    //         if (firstConsumable.getIsDrink())
+    //         {
+    //             // Sort using price comparator function 
+    //             sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkPrice); 
+    //         } 
+    //         else if (sortString == "alcPercentage" || sortString == "alcoholPercentage") 
+    //         {
+    //             // Sort using alcPercentage comparator function
+    //             sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkAlcPerc); 
+    //         }
+    //     }
+    // }
 
-   return response(jsonWriteValue.dump());
-}
+    // if (sortString == "price")
+    // {
+    //     sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorPrice); 
+    // } else if (sortString == "alcPercentage" || sortString == "alcoholPercentage") {
+    //     if (consumableMap.size() > 0) 
+    //     {
+    //         auto firstConsumable = consumableMap.begin()->second;
+    //         if (firstConsumable.getIsDrink())
+    //         {
+    //             // Sort using alcPercentage comparator function
+    //             sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkAlcPerc); 
+    //         } 
+    //     }
+    // }
 
+    // Create a new JSON write value use to write to the file.
+    json::wvalue jsonWriteValue;
 
+    // For each consumable in the vector, convert the consumable to JSON and add to the write value.
+    int index = 0;
+    for (pair<string, T> consumablesPair : consumablesToSort)
+    {
+        jsonWriteValue[index] = consumablesPair.second.convertToJson();
+        index++;
+    }
 
-
-// Define a common interface for consumables(Food, Drink)
-template<typename T>
-bool getIsSpecial(T consumable);
-
-template<>
-bool getIsSpecial(Drink drink) 
-{
-    return drink.getIsAlc();
-}
-
-template<>
-bool getIsSpecial(Food food) 
-{
-    return food.getIsHot();
+    return response(jsonWriteValue.dump());
 }
 
 // Function to handle the GET request that filters consumables.
 template<typename T>
-response filterConsumables(bool isSpecial, map<string, T>& consumableMap) 
+response filterConsumables(bool isDrink, bool isSpecial, map<string, T>& consumableMap) 
 {
     vector<T> found;
     // For each string/consumable pair in the consumables map
     for (pair<string, T> consumablePair : consumableMap) 
     {
-        if (getIsSpecial(consumablePair.second) == isSpecial) 
+        if (consumablePair.second.isDrink == isDrink && consumablePair.second.isSpecial() == isSpecial) 
         {
             found.push_back(consumablePair.second);
         }
@@ -282,7 +295,7 @@ response filterConsumables(bool isSpecial, map<string, T>& consumableMap)
     int index = 0;
     for (T consumable : found)
     {
-        jsonWriteValue[index] = convertToJson(consumable);
+        jsonWriteValue[index] = consumable.convertToJson();
         index++;
     }
 
@@ -305,22 +318,24 @@ response GenericAPI<T>::readAllConsumables(request req)
         return searchConsumables(req.url_params.get("search"), consumableMap);
     }
 
-    // If there is a sort parameter on the request, then sort the consumables.
+    //If there is a sort parameter on the request, then sort the consumables.
     if (req.url_params.get("sort"))
     {
         return sortConsumables(req.url_params.get("sort"), consumableMap);
     }
 
-    // If there is a isSpecial parameter on the request, then filter for special consumables(alcoholic drinks or hot foods).
+    //If there is a isSpecial parameter on the request, then filter for special consumables(alcoholic drinks or hot foods).
     if (req.url_params.get("isAlc")) // Checking if filtering by alcoholic consumables
     {
         bool isAlc = (string(req.url_params.get("isAlc")) == "TRUE" || string(req.url_params.get("isAlc")) == "true");
-        return filterConsumables(isAlc);
+        bool isDrink = true;
+        return filterConsumables(isDrink, isAlc, consumableMap);
     }
     else if (req.url_params.get("isHot")) // Checking if filtering by hot foods
     {
         bool isHot = (string(req.url_params.get("isHot")) == "TRUE" || string(req.url_params.get("isHot")) == "true");
-        return filterConsumables(isHot);
+        bool isDrink = false;
+        return filterConsumables(isDrink, isHot, consumableMap);
     }
 
     // Create a new JSON write value use to write to the file.

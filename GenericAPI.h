@@ -15,6 +15,7 @@ public:
     static crow::response readAllConsumables(crow::request req);
     static void updateConsumable(crow::request req, crow::response& res, std::string id); 
     static crow::response deleteConsumable(std::string id); 
+    bool getIsSpecial(T consumable);
 };
 
 #endif // GENERIC_API_H

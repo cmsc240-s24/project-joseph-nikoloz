@@ -26,11 +26,11 @@ int main()
     SimpleApp app;
 
     //Define endpoints and CRUD methods for the Bar and/or Drink consumable.
-    CROW_ROUTE(app, "/api/bar/drink").methods("POST"_method)(GenericAPI<Drink>::createConsumable);
-    CROW_ROUTE(app, "/api/bar/drink").methods("GET"_method)(GenericAPI<Drink>::readAllConsumables);
-    CROW_ROUTE(app, "/api/bar/drink/<string>").methods("GET"_method)(GenericAPI<Drink>::readConsumable);
-    CROW_ROUTE(app, "/api/bar/drink/<string>").methods("PUT"_method)(GenericAPI<Drink>::updateConsumable);
-    CROW_ROUTE(app, "/api/bar/drink/<string>").methods("DELETE"_method)(GenericAPI<Drink>::deleteConsumable);
+    CROW_ROUTE(app, "/api/bar").methods("POST"_method)(GenericAPI<Drink>::createConsumable);
+    CROW_ROUTE(app, "/api/bar").methods("GET"_method)(GenericAPI<Drink>::readAllConsumables);
+    CROW_ROUTE(app, "/api/bar/<string>").methods("GET"_method)(GenericAPI<Drink>::readConsumable);
+    CROW_ROUTE(app, "/api/bar/<string>").methods("PUT"_method)(GenericAPI<Drink>::updateConsumable);
+    CROW_ROUTE(app, "/api/bar/<string>").methods("DELETE"_method)(GenericAPI<Drink>::deleteConsumable);
     
     // //Define endpoints and CRUD methods for the Bar and/or Drink consumable.
     // CROW_ROUTE(app, "/api/bar").methods(HTTPMethod::POST)(createDrink);

@@ -18,17 +18,14 @@ void Food::biteFood()
 {
     std::string foodName = this->getConsumable();
 
-    if (isEmpty == true)
+    if (bitesAmount == 0)
     {
         throw std::invalid_argument("There's no " + foodName + " left!");
     }
     bitesAmount -= 1;
     std::cout << "You take a bite of your food. tasty" << std::endl;
 
-    if (bitesAmount == 0)
-    {
-        isEmpty = true;
-    }
+    bitesAmount = 0;
 }
 
 
@@ -40,12 +37,11 @@ void Food::biteFood()
 void Food::finishFood() 
 { 
     std::string foodName = this->getConsumable();
-    if (isEmpty == true)
+    if (bitesAmount == 0)
     {
         throw std::invalid_argument("There's no " + foodName + " left!");
     }
     bitesAmount = 0;
-    isEmpty = true;
     if (bitesAmount == 1)
     {
         std::cout << "You finish your food. Delicious!" << std::endl;

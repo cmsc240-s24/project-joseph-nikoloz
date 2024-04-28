@@ -37,6 +37,9 @@ public:
     */
     bool getIsAlc() { return isAlc; }
 
+    // Override the isSpecial() method for Drink
+    bool isSpecial() const override { return isAlc; }
+
     /**
      * @brief Get the integer value for the acohol % of Drink.
      * @return The integer value for the acohol % of Drink.
@@ -89,6 +92,8 @@ public:
      * @throw "Drink already full!"
     */
     void refillDrink();
+
+    static const bool isDrink = true;
 
 private:
     int fullSipsAmount;

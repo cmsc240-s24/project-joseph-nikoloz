@@ -26,6 +26,7 @@ Drink::Drink(json::rvalue readValueJson)
 {
     updateFromJson(readValueJson);
 }
+
 // Convert to JSON
 json::wvalue Drink::convertToJson() 
 {
@@ -33,9 +34,10 @@ json::wvalue Drink::convertToJson()
     writeValueJson["id"] = id;
     writeValueJson["name"] = consumable;
     writeValueJson["price"] = price;
-    writeValueJson["isAlc"] = isAlc;
+    writeValueJson["price"] = price;
     writeValueJson["fullSipsAmount"] = fullSipsAmount;
     writeValueJson["sipsAmount"] = sipsAmount;
+    writeValueJson["isAlc"] = isAlc;
     writeValueJson["alcPercentage"] = alcPercentage; 
     return writeValueJson;
 }

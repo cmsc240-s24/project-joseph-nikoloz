@@ -1,6 +1,7 @@
 #ifndef CONSUMABLE_H
 #define CONSUMABLE_H
 
+#include <crow.h>
 #include <string>
 
 /**
@@ -12,8 +13,11 @@
 class Consumable 
 {
 public:
-    // Default constructor
+    // Constructors
     Consumable() { }
+
+    Consumable(crow::json::rvalue readValueJson);
+
     /**
      * @brief Initializer for a Consumable instance.
      * @param id The id of the consumable item.
@@ -62,12 +66,22 @@ public:
     */
     void setConsumable(std::string cons) { consumable = cons; }
 
+    // Convert to JSON.
+    crow::json::wvalue convertToJson();
+
+    // Update from JSON.
+    void updateFromJson(crow::json::rvalue readValueJson);
+
+    // Virtual function to check if the consumable is special
+    virtual bool isSpecial() const = 0;
+
+    bool isDrink;
 protected:
 
     std::string id;
     std::string consumable;
     int price;
-    bool isDrink;
+    //bool isDrink;
 };
 
 #endif // CONSUMABLE_H 
