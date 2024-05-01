@@ -26,9 +26,9 @@ public:
      * @param alcPerc The % alcohol content of the Drink.
      * @return Null.
     */
-    Drink(std::string id, std::string consumable, int price, int sips, bool isAlc, int alcPerc)
-        : Consumable(id, consumable, price, true),  
-        sipsAmount(sips), fullSipsAmount(sips), isAlc(isAlc), alcPercentage(alcPerc)  {} 
+    Drink(std::string id, std::string consumable, int price, int sips, int alcPerc, bool isAlc)
+        : Consumable(true, id, consumable, price),  
+        sipsAmount(sips), fullSipsAmount(sips), alcPercentage(alcPerc), isAlc(isAlc)  {} 
 
 
     /**
@@ -44,7 +44,7 @@ public:
      * @brief Get the integer value for the acohol % of Drink.
      * @return The integer value for the acohol % of Drink.
     */
-    int getAlcPercentage() { return alcPercentage; }
+    int getAlcPercentage() const { return alcPercentage; }
 
     /**
      * @brief Get the amount of sips left in Drink.
@@ -58,20 +58,19 @@ public:
     */
     int getFullSipsAmount() { return fullSipsAmount; }
 
-    /**
-     * @brief Sets the boolean value displaying whether or not Drink is acoholic
-     * @param isAlcohol boolean value regarding the acoholic status of Drink.
-     * @return Null
-    */
-
     // Convert to JSON.
     crow::json::wvalue convertToJson();
 
     // Update from JSON.
     void updateFromJson(crow::json::rvalue readValueJson);
 
-
+    /**
+     * @brief Sets the boolean value displaying whether or not Drink is acoholic
+     * @param isAlcohol boolean value regarding the acoholic status of Drink.
+     * @return Null
+    */
     void setIsAlc(bool isAlcohol) { isAlc = isAlcohol; }
+    
     /**
      * @brief Takes a sip from the Drink.
      * @return Null.
@@ -96,8 +95,8 @@ public:
     static const bool isDrink = true;
 
 private:
-    int fullSipsAmount;
     int sipsAmount;
+    int fullSipsAmount;
     int alcPercentage;
     bool isAlc;
     

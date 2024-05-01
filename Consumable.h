@@ -26,8 +26,8 @@ public:
      * @param isDrink Boolean value representing whether ot not the consumable item is a drink.
      * @return Null.
      */
-    Consumable(std::string id, std::string consumable, int price, bool isDrink)
-        : id(id), consumable(consumable), price(price), isDrink(isDrink) { }
+    Consumable(bool isDrink, std::string id, std::string consumable, int price)
+        : isDrink(isDrink), id(id), consumable(consumable), price(price) { }
 
     /**
      * @brief Gets the id of the consumable item.
@@ -50,7 +50,7 @@ public:
     /**
      * @brief Gets the current price of the consumable item.
     */
-    int getPrice() { return price; }
+    int getPrice() const { return price; }
 
     /**
      * @brief Sets a new price for the consumable item.
@@ -81,7 +81,6 @@ protected:
     std::string id;
     std::string consumable;
     int price;
-    //bool isDrink;
 };
 
 #endif // CONSUMABLE_H 

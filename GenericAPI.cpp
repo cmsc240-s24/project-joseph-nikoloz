@@ -185,23 +185,26 @@ response searchConsumables(string searchString, const map<string, T>& consumable
     return response(jsonWriteValue.dump());
 }
 
-// Comparator to sort pairs according to third value drink's price.
-struct
+template<typename T>
+struct Comparator 
 {
-   bool operator()(pair<string, Drink>& a, pair<string, Drink>& b) 
-   { 
-       return a.second.getPrice() < b.second.getPrice(); 
-   } 
-} comparatorDrinkPrice;
+    bool operator()(const std::pair<std::string, T>& a, const std::pair<std::string, T>& b) 
+    {
+        // Default comparator compares based on price
+        return a.second.getPrice() < b.second.getPrice();
+    }
+};
 
-// Comparator to sort pairs according to seventh value drink's alcohol percentage.
-struct
+// Specialization for Drink
+template<>
+struct Comparator<Drink> 
 {
-   bool operator()(pair<string, Drink>& a, pair<string, Drink>& b) 
-   { 
-       return a.second.getAlcPercentage() < b.second.getAlcPercentage(); 
-   } 
-} comparatorDrinkAlcPerc;
+    bool operator()(const std::pair<std::string, Drink>& a, const std::pair<std::string, Drink>& b) 
+    {
+        // Comparator for Drink compares based on alcohol percentage
+        return a.second.getAlcPercentage() < b.second.getAlcPercentage();
+    }
+};
 
 //Function to handle the GET request that includes the sort parameter for sorting consumables
 template<typename T>
@@ -220,45 +223,12 @@ response sortConsumables(string sortString, map<string, T>& consumableMap)
     if (sortString == "price")    
     {
         // Sort using price comparator function 
-        sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkPrice); 
+        sort(consumablesToSort.begin(), consumablesToSort.end(), Comparator<T>()); 
 
     } else if (sortString == "alcPercentage" || sortString == "alcoholPercentage") {
         // Sort using alcPercentage comparator function
-        sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkAlcPerc); 
+        sort(consumablesToSort.begin(), consumablesToSort.end(), Comparator<T>()); 
     }
-
-    // if (sortString == "price")
-    // {
-    //     if (consumablesToSort.size() > 0) 
-    //     {
-    //         auto firstConsumable = consumablesToSort.begin()->second;
-    //         if (firstConsumable.getIsDrink())
-    //         {
-    //             // Sort using price comparator function 
-    //             sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkPrice); 
-    //         } 
-    //         else if (sortString == "alcPercentage" || sortString == "alcoholPercentage") 
-    //         {
-    //             // Sort using alcPercentage comparator function
-    //             sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkAlcPerc); 
-    //         }
-    //     }
-    // }
-
-    // if (sortString == "price")
-    // {
-    //     sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorPrice); 
-    // } else if (sortString == "alcPercentage" || sortString == "alcoholPercentage") {
-    //     if (consumableMap.size() > 0) 
-    //     {
-    //         auto firstConsumable = consumableMap.begin()->second;
-    //         if (firstConsumable.getIsDrink())
-    //         {
-    //             // Sort using alcPercentage comparator function
-    //             sort(consumablesToSort.begin(), consumablesToSort.end(), comparatorDrinkAlcPerc); 
-    //         } 
-    //     }
-    // }
 
     // Create a new JSON write value use to write to the file.
     json::wvalue jsonWriteValue;
@@ -356,4 +326,6 @@ response GenericAPI<T>::readAllConsumables(request req)
 
 // Explicit template instantiation
 template class GenericAPI<Drink>;
+template class GenericAPI<Food>;
+
 

@@ -12,9 +12,11 @@
 class Food : public Consumable 
 {
 public:
-    //Default Constructor
-    Food(std::string id, std::string consumable, int price)
-        : Consumable(id, consumable, price, false) {} 
+    // Constructors
+    Food(): Consumable() { }
+
+    Food(crow::json::rvalue readValueJson);
+
     /**
      * @brief Constructor for Food.
      * @param bitesAmount The amount of bites left in the Food before its empty.
@@ -22,7 +24,7 @@ public:
      * @return Null.
     */
     Food(std::string id, std::string consumable, int price, int bites, bool isHot)
-        : Consumable(id, consumable, price, false),  
+        : Consumable(false, id, consumable, price),  
         bitesAmount(bites), fullBitesAmount(bites), isHot(isHot) {} 
 
 
@@ -53,6 +55,12 @@ public:
     */
     int getFullBitesAmount() { return fullBitesAmount; }
     
+    // Convert to JSON.
+    crow::json::wvalue convertToJson();
+
+    // Update from JSON.
+    void updateFromJson(crow::json::rvalue readValueJson);
+    
     /**
      * @brief Eats Food completely.
      * @return Null.
@@ -70,8 +78,8 @@ public:
     static const bool isDrink = false;
     
 private:
-    int fullBitesAmount;
     int bitesAmount;
+    int fullBitesAmount;
     bool isHot;
     
 };

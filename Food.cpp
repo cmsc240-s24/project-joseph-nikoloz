@@ -3,12 +3,46 @@
 #include <iostream>
 #include "Consumable.h"
 #include "Food.h"
+
+using namespace crow;
 /**
  * @file Food.cpp
  * @brief Implementation file for the Food class functions.
 */
 
+
+
+Food::Food(json::rvalue readValueJson)
+{
+    updateFromJson(readValueJson);
+}
+
+// Convert to JSON
+json::wvalue Food::convertToJson() 
+{
+    json::wvalue writeValueJson;
+    writeValueJson["id"] = id;
+    writeValueJson["name"] = consumable;
+    writeValueJson["price"] = price;
+    writeValueJson["fullBitesAmount"] = fullBitesAmount;
+    writeValueJson["bitesAmount"] = bitesAmount;
+    writeValueJson["isHot"] = isHot;
+
+    return writeValueJson;
+}
     
+// Update from JSON
+void Food::updateFromJson(json::rvalue readValueJson)
+{
+    id = readValueJson["id"].s();
+    consumable = readValueJson["name"].s();
+    price = static_cast<int>(readValueJson["price"].d());    
+    fullBitesAmount = static_cast<int>(readValueJson["fullBitesAmount"].d());
+    bitesAmount = static_cast<int>(readValueJson["bitesAmount"].d());
+    isHot = readValueJson["isHot"].b();
+
+}
+
 /**
  * @brief Takes a bite from the Food.
  * @return Null.
