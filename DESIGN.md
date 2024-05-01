@@ -105,8 +105,9 @@ In the context of this API, {id} would typically be replaced by a unique identif
   - **Description**: Retrieve a list of all Drinks.
   - **Response**: `200 OK` with an array of Drink objects in the body.
 
-- **GET** `/api/drinks/{id}`
+- **GET** `/api/drinks/{id}` OR `/api/drinks/?<string>=`
   - **Description**: Retrieve details of a specific Drink.
+  - **Filter/Sort/Search**: Allows for searching, sorting, and filtering with parameters.
   - **Response**: `200 OK` with the Drink object in the body.
   - **Error**: `404 Consumable Not Found` if the Drink does not exist.
 
