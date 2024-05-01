@@ -54,6 +54,6 @@ clean-code:
 	rm -f *.o barAPI
 
 clean-unit-tests:
-	rm GenericAPITest persistenceTest ConsumableTest DrinkTest FoodTest
+	rm GenericAPITest persistenceTest ConsumableTest DrinkTest FoodTest BartenderTest
 	
 clean: clean-code clean-unit-tests
