@@ -187,4 +187,4 @@ In the context of this API, {id} would typically be replaced by a unique identif
 This API will also use standard HTTP status codes to communicate the outcome of API requests, ensuring that clients can handle responses appropriately.
 
 ## UML Diagrams
-![Bar UML Diagram](barAPI UML diagram.png)
+![Bar UML Diagram](barAPI_UML_diagram.png)
