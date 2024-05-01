@@ -76,7 +76,7 @@ response GenericAPI<T>::readConsumable(string id)
     {
         // If the consumable was not found in the map return a 404 not found error.
         // 404 Not Found: The server cannot find the requested consumable.
-        return response(404, "consumable Not Found");
+        return response(404, "Consumable Not Found");
     }
 }
 
