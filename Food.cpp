@@ -5,11 +5,11 @@
 #include "Food.h"
 
 using namespace crow;
+
 /**
  * @file Food.cpp
  * @brief Implementation file for the Food class functions.
 */
-
 
 
 Food::Food(json::rvalue readValueJson)
@@ -58,8 +58,6 @@ void Food::biteFood()
     }
     bitesAmount -= 1;
     std::cout << "You take a bite of your food. tasty" << std::endl;
-
-    bitesAmount = 0;
 }
 
 

@@ -27,17 +27,32 @@ DrinkTest: DrinkTest.cpp Drink.cpp Drink.h Drink.o
 FoodTest: FoodTest.cpp Food.cpp Food.h Food.o
 	g++ -lpthread FoodTest.cpp Food.o -o FoodTest
 
+####################
+Bartender.o: Bartender.h Bartender.cpp Consumable.h 
+	g++ -Wall Bartender.cpp -c
+
+BartenderTest: BartenderTest.cpp Bartender.cpp Bartender.h Bartender.o Consumable.h Drink.h
+	g++ -lpthread BartenderTest.cpp -o BartenderTest
+
+persistenceTest: persistenceTest.cpp persistence.h Drink.o
+	g++ -lpthread persistenceTest.cpp Drink.o -o persistenceTest
+
+
+
+GenericAPITest: GenericAPITest.cpp GenericAPI.h Consumable.h Drink.h Food.h
+	g++ -lpthread GenericAPITest.cpp -o GenericAPITest
+
 #run-unit-tests: GenericAPITest persistenceTest
 #	./GenericAPITest    ;\
-	./persistenceTest	;\
-	./ConsumableTest	;\
-	./DrinkTest	;\
-	./FoodTest
+
 
 run-unit-tests:
 	./ConsumableTest	;\
 	./DrinkTest	;\
 	./FoodTest	;\
+	./BartenderTest	;\
+	./GenericAPITest ;\
+	./persistenceTest ;\
 
 clean-code: 
 	rm -f *.o barAPI

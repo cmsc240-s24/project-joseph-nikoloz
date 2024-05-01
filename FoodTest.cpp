@@ -38,10 +38,9 @@ TEST_SUITE("Food Tests") {
 
     TEST_CASE("Reordering Food") {
         Food food("4", "Salad", 10, 3, false);
-        food.finishFood();
-        CHECK_THROWS_AS(food.reorderFood(), std::invalid_argument);  // Food is empty, can reorder
-        food.reorderFood();
-        CHECK(food.getBitesAmount() == 3);
-        CHECK_THROWS_AS(food.reorderFood(), std::invalid_argument);  // Already full, should throw
+        food.finishFood();  // This will set bitesAmount to 0.
+        CHECK_NOTHROW(food.reorderFood());  // Since bitesAmount is 0, reorder should not throw here.
+        CHECK(food.getBitesAmount() == 3);  // Check if food is refilled.
+        CHECK_THROWS_AS(food.reorderFood(), std::invalid_argument);  // Now it should throw because it's already full.
     }
 }

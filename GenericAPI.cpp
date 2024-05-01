@@ -327,5 +327,3 @@ response GenericAPI<T>::readAllConsumables(request req)
 // Explicit template instantiation
 template class GenericAPI<Drink>;
 template class GenericAPI<Food>;
-
-

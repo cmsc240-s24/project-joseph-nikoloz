@@ -46,7 +46,7 @@ int main()
 
     // Run the web service app. 
     // *****************  MAKE SURE TO USE A UNIQUE PORT NUMBER ******************/
-    app.port(17123).run();
+    app.port(12123).run();
 
     //Save the consumables to a file to save game.
     saveToFile<Drink>(GenericAPI<Drink>::consumableMap, "velvetMartiniDrinks.json");

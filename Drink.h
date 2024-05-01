@@ -26,7 +26,7 @@ public:
      * @param alcPerc The % alcohol content of the Drink.
      * @return Null.
     */
-    Drink(std::string id, std::string consumable, int price, int sips, int alcPerc, bool isAlc)
+    Drink(std::string id, std::string consumable, int price, int sips, bool isAlc, int alcPerc)
         : Consumable(true, id, consumable, price),  
         sipsAmount(sips), fullSipsAmount(sips), alcPercentage(alcPerc), isAlc(isAlc)  {} 
 
