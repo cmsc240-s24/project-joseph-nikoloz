@@ -7,11 +7,15 @@ The barAPI will allow the user to visit bars, talk with the bartenders, and enjo
 This API is for fun, and can also allow the user to learn about various drinks and foods.
 
 ## Stakeholders
-Anyone interested in choose-your-adventure- type of games will enjoy this experience. I think the biggest attraction to this API would be the conversational easter-eggs hidden around the game. The easter eggs are spread around via bartender responses.
-
+Anyone interested in choose-your-adventure- type of games will enjoy this experience. I think the biggest attraction to this API would be the conversational easter-eggs hidden around the game. The easter eggs are spread around via bartender responses. 
+# H1
+test 1
+##
+test 2
+###
+test 3
 
 ## Functional Requirements
-...
 
 ## Use Case Description
 ...
